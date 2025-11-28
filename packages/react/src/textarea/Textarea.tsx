@@ -114,6 +114,18 @@ export const Textarea = React.forwardRef(function Textarea(
       return undefined;
     }
 
+    // Check if the browser supports native field-sizing
+    const supportsFieldSizing =
+      typeof CSS !== 'undefined' &&
+      typeof CSS.supports === 'function' &&
+      CSS.supports('field-sizing', 'content');
+
+    // If the browser supports field-sizing, skip the JS resize logic
+    if (supportsFieldSizing) {
+      console.log('Field-sizing supported; skipping JS resize logic.');
+      return undefined;
+    }
+
     // Track the last applied overflow state so we avoid redundant writes.
     let lastIsOverflowing: boolean | null = null;
 
@@ -169,6 +181,7 @@ export const Textarea = React.forwardRef(function Textarea(
       }
 
       const { outerHeightStyle, isOverflowing, rowsOccupied } = styles;
+      console.log("Textarea resize:", { outerHeightStyle, isOverflowing, rowsOccupied });
 
       // only apply height if we are not at minimum rows yet
       if (minRows != null) {

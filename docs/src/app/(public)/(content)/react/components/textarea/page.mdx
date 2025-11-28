@@ -58,9 +58,9 @@ The CSS `field-sizing` property lets form fields size themselves to their conten
 
 Browser support is about **71 % globally**. Chrome 123+, Edge 123+, and Opera 109+ support it. Safari only recently added it in TP, and many others (Firefox, IE, Opera Mini, UC Browser, KaiOS) don't yet.
 
-Because support is incomplete, the demo may not work in older browsers or Safari `<26`. If the textarea doesn't resize, try a **current Chrome or Edge** build.
+The Textarea component automatically detects browser support for `field-sizing: content` at runtime using `CSS.supports()`. When supported, it uses native CSS field sizing for optimal performance. When unsupported, it falls back to JavaScript-based resizing logic. This ensures the component works everywhere while taking advantage of modern browser capabilities.
 
-> Once support passes ~90 %, we plan to switch the Textarea component to `field-sizing` by default, dropping the JS fallback.
+Because support is incomplete, the demo may not work in older browsers or Safari `<26`. If the textarea doesn't resize, try a **current Chrome or Edge** build.
 
 import { DemoFieldSizing } from './demos/field-sizing';
 
